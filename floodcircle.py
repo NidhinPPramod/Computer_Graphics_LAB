@@ -60,6 +60,7 @@ def symmetry(x,y,xc,yc):
     glVertex2f(*translate_origin(-y+xc,-x+yc))
 
 def flood_fill(x, y, new_color, old_color):
+
     color = get_pixel(x, y)
     if all(color == old_color):
         set_pixel(x, y, new_color)
@@ -70,6 +71,7 @@ def flood_fill(x, y, new_color, old_color):
 
 
 def mouse_click(button, state, x, y):
+    
     if button == GLUT_LEFT_BUTTON and state == GLUT_DOWN:
         print(x,y)
         flood_fill(x, y, [0, 1, .5], get_pixel(x, y))

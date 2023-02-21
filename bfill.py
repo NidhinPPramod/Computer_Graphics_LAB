@@ -44,7 +44,7 @@ def plot_triangle():
 
 def boundary_fill(x, y, fill_color, boundary_color):
     color = get_pixel(x, y)
-    if (not all(color == fill_color)) and not all(color == boundary_color):
+    if ( all(color != fill_color)) and  all(color != boundary_color):
 
         set_pixel(x, y, fill_color)
         boundary_fill(x + point_size, y, fill_color, boundary_color)

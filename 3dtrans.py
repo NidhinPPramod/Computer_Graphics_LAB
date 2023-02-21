@@ -82,6 +82,8 @@ def plot_points():
 def main():
 	glutInit()
 	glutInitWindowSize(window_size,window_size)
+	glutInitWindowPosition(50, 50)
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
 	glutCreateWindow("3-D transformation")
 	glutIdleFunc(plot_points)
 	glutMainLoop()

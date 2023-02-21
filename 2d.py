@@ -7,7 +7,7 @@ Window_size=720
 
 def clearScreen():
     glClearColor(1.0, 1.0, 1.0, 1.0)
-    gluOrtho2D(-1.0,1.0,1.0,-1.0)
+    gluOrtho2D(-1.0,1.0,-1.0,1.0)
 
 
 def draw_triangle():

@@ -17,7 +17,7 @@ def init_display():
 
 def midpoint_circle():
     glBegin(GL_POINTS)
-    global xc,yc,r
+    global r
     x=0
     y =r
     p = 1 - r

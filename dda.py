@@ -7,7 +7,7 @@ def init_display():
     glClear(GL_COLOR_BUFFER_BIT)
     glColor3f(1.0,0.0,0.0)
     glPointSize(3.0)
-    gluOrtho2D(-100.0,100.0,-100.0,100.0)
+    gluOrtho2D(-500.0,500.0,-500.0,500.0)
 
 def plot_line():
     global x1,y1,x2,y2

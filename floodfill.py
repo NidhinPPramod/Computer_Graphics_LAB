@@ -19,7 +19,7 @@ def get_pixel(x, y):
     return np.array([round(x, 1) for x in pixel[0][0]])
 
 
-def set_pixel(x, y, fill_color=(0, 0, 0)):
+def set_pixel(x, y, fill_color=[0, 0, 0]):
     glColor3f(*fill_color)
     glPointSize(point_size)
     glBegin(GL_POINTS)
@@ -53,7 +53,7 @@ def flood_fill(x, y, new_color, old_color):
 
 def mouse_click(button, state, x, y):
     if button == GLUT_LEFT_BUTTON and state == GLUT_DOWN:
-        flood_fill(x, y, [0, 1, .5], get_pixel(x, y))
+        flood_fill(x, y, [0, 1, 1], get_pixel(x, y))
 
 
 def main():

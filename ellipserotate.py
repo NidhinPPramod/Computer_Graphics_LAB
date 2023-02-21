@@ -2,19 +2,21 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 import sys
+import math
 
 
 WINDOW_SIZE=500
-
+angle=0
 def init_display():
     glClear(GL_COLOR_BUFFER_BIT)
     glColor3f(1, 0, 0)
-    glPointSize(5.0)
-    gluOrtho2D(-100.0,100.0,100.0,-100.0)
+    glPointSize(2.0)
+    gluOrtho2D(-500.0,500.0,500.0,-500.0)
 
 def midpoint_ellipse():
     glBegin(GL_POINTS)
     global yr,xr
+    global x,y
     x=0
     y =yr
    
@@ -58,14 +60,39 @@ def midpoint_ellipse():
         plot_symmetric(x, y)
 
     glEnd()
-    glFlush()
+
 
 def plot_symmetric(x,y):
-    global xc,yc
-    glVertex2f(xc+x, yc+y)
-    glVertex2f(xc+x, yc-y)
-    glVertex2f(xc-x, yc+y)
-    glVertex2f(xc-x, yc-y)
+    global xc,yc,angle
+    glVertex2f((xc+x)*math.cos(math.radians(angle))-(yc+y)*math.sin(math.radians(angle)), (xc+x)*math.sin(math.radians(angle))+(yc+y)*math.cos(math.radians(angle)))
+    glVertex2f((xc+x)*math.cos(math.radians(angle))-(yc-y)*math.sin(math.radians(angle)), (xc+x)*math.sin(math.radians(angle))+(yc-y)*math.cos(math.radians(angle)))
+    glVertex2f((xc-x)*math.cos(math.radians(angle))-(yc+y)*math.sin(math.radians(angle)), (xc-x)*math.sin(math.radians(angle))+(yc+y)*math.cos(math.radians(angle)))
+    glVertex2f((xc-x)*math.cos(math.radians(angle))-(yc-y)*math.sin(math.radians(angle)), (xc-x)*math.sin(math.radians(angle))+(yc-y)*math.cos(math.radians(angle)))
+
+
+def drawLine():
+    global xc,yc,x,y
+    glBegin(GL_LINES)
+    glVertex2f(xc, yc)
+    glVertex2f((xc+x)*math.cos(math.radians(angle))-(yc+y)*math.sin(math.radians(angle)),(xc+x)*math.sin(math.radians(angle))+(yc+y)*math.cos(math.radians(angle)))
+    glEnd()
+
+def draw():
+    global x,y,angle
+    glClear(GL_COLOR_BUFFER_BIT)
+    midpoint_ellipse()
+    glutSwapBuffers()
+    
+
+def animate(temp):
+    global x,y,angle
+    
+    glutPostRedisplay()
+    glutTimerFunc(int(10000/60),animate,int(0))
+    if (angle>=360):
+        angle=0
+    angle+=10
+
 
 
 def main():
@@ -79,8 +106,9 @@ def main():
     xr = int(input("Enter length of radius along x axis "))  
     yr = int(input("Enter length of radius along y axis"))  
     glutCreateWindow("ellipse")
+    glutDisplayFunc(draw)
+    glutTimerFunc(0,animate,0)
     init_display()
-    glutDisplayFunc(midpoint_ellipse) 
     glutMainLoop()
 
 main()
